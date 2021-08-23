@@ -121,8 +121,7 @@ h2 {
 }
 
 h2 a {
-	//color: #000;
-	color: #fff;
+	color: #000;
 	margin: 0 4px;
 }
 
