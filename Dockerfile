@@ -20,6 +20,8 @@ RUN export DIR_TMP="$(mktemp -d)" \
                                                 wget \
                                                 unzip \
                                                 git \
+                                                python3 \
+                                                python3-pip \
                                                 nginx \
                                                 vim \
                                                 psmisc \
