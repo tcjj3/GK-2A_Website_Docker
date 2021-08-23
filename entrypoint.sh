@@ -57,7 +57,7 @@ cp /opt/upstream-preview-custom-light.original.tpl /opt/upstream-preview-custom-
 cp /opt/upstream-preview-custom-dark.original.tpl /opt/upstream-preview-custom-dark.tpl
 
 if [ -z "$HEADMSG" ]; then
-HEADMSG="This is <a rel=\"noopener noreferrer\" href=\"https://github.com/tcjj3\">tcjj3</a>."
+#HEADMSG="This is <a rel=\"noopener noreferrer\" href=\"https://github.com/tcjj3\">tcjj3</a>."
 fi
 
 sed -i "s#HEADMESSAGESINTHEMEBYTCJJ3#$HEADMSG#gi" /opt/upstream-preview-custom-light.tpl
