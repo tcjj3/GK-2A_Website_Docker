@@ -15,7 +15,7 @@ Install docker-ce, example given on Debian.
 [tcjj3@debian]$ sudo systemctl enable docker && sudo systemctl start docker
 ```
 
-Run GK-2A_Hirez_Docker.
+Run GK-2A_Website_Docker.
 
 ```
 [tcjj3@debian]$ sudo docker volume create xrit-rx
