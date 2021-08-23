@@ -45,4 +45,4 @@ Run GK-2A_Website_Docker.
 <br>
 **The `HEADMSG` environment variable is to set the `Message` which you want to show at the `Top` of the website.**
 <br>
-**The other environment variables are just like in [https://github.com/tcjj3/GK-2A_Hirez_Docker](tcjj3/GK-2A_Hirez_Docker).**
+**The other environment variables are just like in [tcjj3/GK-2A_Hirez_Docker](https://github.com/tcjj3/GK-2A_Hirez_Docker).**
