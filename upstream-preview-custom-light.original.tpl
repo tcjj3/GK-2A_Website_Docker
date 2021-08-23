@@ -352,7 +352,10 @@ footer {
 			</h2>
 			<br />
 			<h1>
-				Navigation: {{range $i, $crumb := .Breadcrumbs}}<a href="{{html $crumb.Link}}">{{html $crumb.Text}}</a>{{if ne $i 0}}/{{end}}{{end}}
+				Navigations: 
+			</h1>
+			<h1>
+				{{range $i, $crumb := .Breadcrumbs}}<a href="{{html $crumb.Link}}">{{html $crumb.Text}}</a>{{if ne $i 0}}/{{end}}{{end}}
 			</h1>
 		</header>
 		<main>
