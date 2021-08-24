@@ -56,19 +56,29 @@ fi
 cp /opt/upstream-preview-custom-light.original.tpl /opt/upstream-preview-custom-light.tpl
 cp /opt/upstream-preview-custom-dark.original.tpl /opt/upstream-preview-custom-dark.tpl
 
+
 #if [ -z "$TITLEADDITIONALTEXT" ]; then
 #TITLEADDITIONALTEXT=" - tcjj3 (BG7XUD)"
 #fi
 
 #if [ -z "$HEADMSG" ]; then
-#HEADMSG="This is <a rel=\"noopener noreferrer\" href=\"https://github.com/tcjj3\">tcjj3</a>."
+#HEADMSG="This is <a rel=\"noopener noreferrer\" href=\"https://github.com/tcjj3\">tcjj3 (BG7XUD)</a>."
 #fi
+
+#if [ -z "$FOOTERMSG" ]; then
+#FOOTERMSG="<h1>Copyright $(python3 -c "print(\"\xa9\")") <a rel=\"noopener noreferrer\" href=\"https://github.com/tcjj3\">tcjj3 (BG7XUD)</a></h1>"
+#FOOTERMSG="<h1>Copyright $(printf $(printf '\\%o' $(printf %08x 0xa9 | sed 's/../0x& /g')) | iconv -f UTF-32BE -t UTF-8) <a rel=\"noopener noreferrer\" href=\"https://github.com/tcjj3\">tcjj3 (BG7XUD)</a></h1>"
+#fi
+
 
 sed -i "s#TITLEADDITIONALTEXTINTHEMEBYTCJJ3#$TITLEADDITIONALTEXT#gi" /opt/upstream-preview-custom-light.tpl
 sed -i "s#TITLEADDITIONALTEXTINTHEMEBYTCJJ3#$TITLEADDITIONALTEXT#gi" /opt/upstream-preview-custom-dark.tpl
 
 sed -i "s#HEADMESSAGESINTHEMEBYTCJJ3#$HEADMSG#gi" /opt/upstream-preview-custom-light.tpl
 sed -i "s#HEADMESSAGESINTHEMEBYTCJJ3#$HEADMSG#gi" /opt/upstream-preview-custom-dark.tpl
+
+sed -i "s#FOOTERMESSAGESINTHEMEBYTCJJ3#$FOOTERMSG#gi" /opt/upstream-preview-custom-light.tpl
+sed -i "s#FOOTERMESSAGESINTHEMEBYTCJJ3#$FOOTERMSG#gi" /opt/upstream-preview-custom-dark.tpl
 
 
 

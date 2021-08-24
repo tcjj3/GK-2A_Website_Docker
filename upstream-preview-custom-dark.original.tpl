@@ -486,7 +486,11 @@ footer {
 			</div>
 		</main>
 		<footer>
-			Theme by <a rel="noopener noreferrer" href="https://github.com/tcjj3">tcjj3</a>
+			Theme by <a rel="noopener noreferrer" href="https://github.com/tcjj3">tcjj3 (BG7XUD)</a>
+			<br>
+			<br>
+			<br>
+			FOOTERMESSAGESINTHEMEBYTCJJ3
 		</footer>
 		<script>
 			var filterEl = document.getElementById('filter');
