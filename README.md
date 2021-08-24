@@ -27,7 +27,9 @@ Run GK-2A_Website_Docker.
  -e DASHBOARDSERVER="192.168.1.2:1692" \
  -e FILEBROWSERSERVER="192.168.1.2:8888" \
  -e THEME="dark" \
+ -e TITLEADDITIONALTEXT=" - tcjj3" \
  -e HEADMSG="This is <a rel=\"noopener noreferrer\" href=\"https://github.com/tcjj3\">tcjj3</a>." \
+ -e FOOTERMSG="<h1>Copyright $(printf $(printf '\\%o' $(printf %08x 0xa9 | sed 's/../0x& /g')) | iconv -f UTF-32BE -t UTF-8) <a rel=\"noopener noreferrer\" href=\"https://github.com/tcjj3\">tcjj3</a></h1>" \
  -e PROXY_DASHBOARD=true \
  -e CREATE_DASHBOARD_LINK=true \
  -e PROXY_FILEBROWSER=true \
@@ -43,6 +45,10 @@ Run GK-2A_Website_Docker.
 <br>
 **The `THEME` environment variable can be "`light`", "`dark`" or just set a `filename` which is an exist file in the container.**
 <br>
+**The `TITLEADDITIONALTEXT` environment variable is to set the `Additional Text` which you want to show at the `Title` of the website.**
+<br>
 **The `HEADMSG` environment variable is to set the `Message` which you want to show at the `Top` of the website.**
+<br>
+**The `FOOTERMSG` environment variable is to set the `Message` which you want to show at the `Footer` of the website.**
 <br>
 **The other environment variables are just like in [tcjj3/GK-2A_Hirez_Docker](https://github.com/tcjj3/GK-2A_Hirez_Docker).**
