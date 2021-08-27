@@ -30,6 +30,8 @@ Run GK-2A_Website_Docker.
  -e TITLEADDITIONALTEXT=" - GK-2A Satellite Receive Server by tcjj3" \
  -e HEADMSG="This is <a rel=\"noopener noreferrer\" href=\"https://github.com/tcjj3\">tcjj3</a>." \
  -e FOOTERMSG="<h1>Copyright $(printf $(printf '\\%o' $(printf %08x 0xa9 | sed 's/../0x& /g')) | iconv -f UTF-32BE -t UTF-8) <a rel=\"noopener noreferrer\" href=\"https://github.com/tcjj3\">tcjj3</a></h1>" \
+ -e USERS="Bob hiccup Amy beauty" \
+ -e REALM="GK-2A Satellite Receive Server by tcjj3 (BG7XUD), please contract the site administrator for an account!"
  -e PROXY_DASHBOARD=true \
  -e CREATE_DASHBOARD_LINK=true \
  -e PROXY_FILEBROWSER=true \
@@ -50,5 +52,9 @@ Run GK-2A_Website_Docker.
 **The `HEADMSG` environment variable is to set the `Message` which you want to show at the `Top` of the website.**
 <br>
 **The `FOOTERMSG` environment variable is to set the `Message` which you want to show at the `Footer` of the website.**
+<br>
+**The `USERS` environment variable is to set the `UserNames` and `Passwords` which you want to just authorize to access the website. Each `UserName` or `Password` is seperated with just a space.**
+<br>
+**The `REALM` environment variable is to set the `Message` which you want to show at the `Login Dialog` of the website.**
 <br>
 **The other environment variables are just like in [tcjj3/GK-2A_Hirez_Docker](https://github.com/tcjj3/GK-2A_Hirez_Docker).**
