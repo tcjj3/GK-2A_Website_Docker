@@ -27,7 +27,7 @@ Run GK-2A_Website_Docker.
  -e DASHBOARDSERVER="192.168.1.2:1692" \
  -e FILEBROWSERSERVER="192.168.1.2:8888" \
  -e THEME="dark" \
- -e TITLEADDITIONALTEXT=" - tcjj3" \
+ -e TITLEADDITIONALTEXT=" - GK-2A Satellite Receive Server by tcjj3" \
  -e HEADMSG="This is <a rel=\"noopener noreferrer\" href=\"https://github.com/tcjj3\">tcjj3</a>." \
  -e FOOTERMSG="<h1>Copyright $(printf $(printf '\\%o' $(printf %08x 0xa9 | sed 's/../0x& /g')) | iconv -f UTF-32BE -t UTF-8) <a rel=\"noopener noreferrer\" href=\"https://github.com/tcjj3\">tcjj3</a></h1>" \
  -e PROXY_DASHBOARD=true \
