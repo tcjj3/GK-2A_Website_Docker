@@ -471,7 +471,7 @@ else{
 }
 }
 </script>
-<h2><a href="#" onclick="logout()">Logout</a></h2>
+<h2><a href="#" onclick="logout()" style="display:none; ">Logout</a></h2>
 			<br />
 			<h1>
 				Navigations: 
