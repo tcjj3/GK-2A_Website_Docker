@@ -167,12 +167,12 @@ fi
 
 USERSLIST=`echo "$USERS" | sed "s/  / /gi" | sed "s/  / /gi" | sed "s/ /\n/gi" | awk -F ' ' 'BEGIN {count=0} {if ($0 != "") {count+=1; print $0; if (count > 1 && count % 2 == 0) {print '\n'}}}' | sed ":a;N;s/\n/ /gi;$!ba" | sed "s#  # {\n        realm \"$REALM\"\n        /\n    }\n    basicauth #gi"`
 
-USERSLIST=`echo -e "    basicauth $USERSLIST{\n        realm \"$REALM\"\n        /\n    }"`
+USERSLIST=`echo "    basicauth $USERSLIST{\n        realm \"$REALM\"\n        /\n    }"`
 
 cat << EOF >> /etc/caddy/Caddyfile
     
     
-    $USERSLIST
+$USERSLIST
 EOF
 
 fi
