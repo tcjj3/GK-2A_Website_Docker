@@ -2,8 +2,8 @@ FROM debian:buster-slim
 
 LABEL maintainer "Chaojun Tan <https://github.com/tcjj3>"
 
-ADD upstream-preview-custom-light.original.tpl /opt/upstream-preview-custom-light-auth.original.tpl
-ADD upstream-preview-custom-dark.original.tpl /opt/upstream-preview-custom-dark-auth.original.tpl
+ADD upstream-preview-custom-light-auth.original.tpl /opt/upstream-preview-custom-light-auth.original.tpl
+ADD upstream-preview-custom-dark-auth.original.tpl /opt/upstream-preview-custom-dark-auth.original.tpl
 ADD upstream-preview-custom-light.original.tpl /opt/upstream-preview-custom-light.original.tpl
 ADD upstream-preview-custom-dark.original.tpl /opt/upstream-preview-custom-dark.original.tpl
 ADD 404.original.htm /opt/404.original.htm
