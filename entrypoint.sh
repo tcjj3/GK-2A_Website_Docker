@@ -165,7 +165,7 @@ if [ -z "$REALM" ]; then
 REALM="GK-2A Satellite Receive Server, please contract the site administrator for an account!"
 fi
 
-USERSLIST=`echo "$USERS" | sed "s/ /\n/gi" | awk -F ' ' '{print $0; if (NR > 1 && NR % 2 == 0) {print '\n'}}' | sed ":a;N;s/\n/ /gi;$!ba" | sed "s#  # {\n        realm \"$REALM\"\n        /\n    }\n    basicauth #gi"`
+USERSLIST=`echo "$USERS" | sed "s/  / /gi" | sed "s/  / /gi" | sed "s/ /\n/gi" | awk -F ' ' '{print $0; if (NR > 1 && NR % 2 == 0) {print '\n'}}' | sed ":a;N;s/\n/ /gi;$!ba" | sed "s#  # {\n        realm \"$REALM\"\n        /\n    }\n    basicauth #gi"`
 
 USERSLIST=`echo -e "    basicauth $USERSLIST{\n        realm \"$REALM\"\n        /\n    }"`
 
