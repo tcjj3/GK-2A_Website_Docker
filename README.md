@@ -53,7 +53,7 @@ Run GK-2A_Website_Docker.
 <br>
 **The `FOOTERMSG` environment variable is to set the `Message` which you want to show at the `Footer` of the website.**
 <br>
-**The `USERS` environment variable is to set the `UserNames` and `Passwords` which you want to just authorize to access the website. Each `UserName` or `Password` is seperated with just a space. If this environment variable is not setted or setted to an empty value, then everyone can access to the website (not enable `basicauth`).**
+**The `USERS` environment variable is to set the `UserNames` and `Passwords` which you want to just authorize to access the website. Each `UserName` or `Password` is seperated with just a space, the format is like "`UserName Password[ UserName Password]...`". If this environment variable is not setted or setted to an empty value, then everyone can access to the website (not enable `basicauth`).**
 <br>
 **The `REALM` environment variable is to set the `Message` which you want to show in the `Login Dialog` of this website.**
 <br>
