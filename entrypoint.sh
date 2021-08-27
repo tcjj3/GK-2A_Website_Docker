@@ -136,8 +136,28 @@ cat << EOF > /etc/caddy/Caddyfile
     root /usr/local/bin/xrit-rx/src/received/LRIT
     tls off
     gzip
+EOF
+
+
+
+
+
+
+
+
+# Path which is saving "*.tpl"
+#cd /usr/local/bin/xrit-rx/src/received/LRIT > /dev/null 2>&1
+cd /opt > /dev/null 2>&1
+
+
+if [ -f "${THEME}" ]; then
+cat << EOF >> /etc/caddy/Caddyfile
+    
     browse / ${THEME}
 EOF
+fi
+
+
 
 
 
@@ -148,8 +168,8 @@ cat << EOF >> /etc/caddy/Caddyfile
     
     
     errors {
-        404 404.htm
-        401 401.htm
+        404 /opt/404.htm
+        401 /opt/401.htm
     }
 EOF
 
@@ -171,11 +191,12 @@ USERSLIST=`echo "    basicauth $USERSLIST{\n        realm \"$REALM\"\n        /\
 
 cat << EOF >> /etc/caddy/Caddyfile
     
-    
 $USERSLIST
 EOF
 
 fi
+
+
 
 
 
