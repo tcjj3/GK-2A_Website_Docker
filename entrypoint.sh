@@ -55,10 +55,14 @@ fi
 
 cp /opt/upstream-preview-custom-light.original.tpl /opt/upstream-preview-custom-light.tpl
 cp /opt/upstream-preview-custom-dark.original.tpl /opt/upstream-preview-custom-dark.tpl
+cp /opt/upstream-preview-custom-light-auth.original.tpl /opt/upstream-preview-custom-light-auth.tpl
+cp /opt/upstream-preview-custom-dark-auth.original.tpl /opt/upstream-preview-custom-dark-auth.tpl
+cp /opt/404.original.htm /opt/404.htm
+cp /opt/401.original.htm /opt/401.htm
 
 
 #if [ -z "$TITLEADDITIONALTEXT" ]; then
-#TITLEADDITIONALTEXT=" - tcjj3 (BG7XUD)"
+#TITLEADDITIONALTEXT=" - GK-2A Satellite Receive Server by tcjj3 (BG7XUD)"
 #fi
 
 #if [ -z "$HEADMSG" ]; then
@@ -73,24 +77,46 @@ cp /opt/upstream-preview-custom-dark.original.tpl /opt/upstream-preview-custom-d
 
 sed -i "s#TITLEADDITIONALTEXTINTHEMEBYTCJJ3#$TITLEADDITIONALTEXT#gi" /opt/upstream-preview-custom-light.tpl
 sed -i "s#TITLEADDITIONALTEXTINTHEMEBYTCJJ3#$TITLEADDITIONALTEXT#gi" /opt/upstream-preview-custom-dark.tpl
+sed -i "s#TITLEADDITIONALTEXTINTHEMEBYTCJJ3#$TITLEADDITIONALTEXT#gi" /opt/upstream-preview-custom-light-auth.tpl
+sed -i "s#TITLEADDITIONALTEXTINTHEMEBYTCJJ3#$TITLEADDITIONALTEXT#gi" /opt/upstream-preview-custom-dark-auth.tpl
+sed -i "s#TITLEADDITIONALTEXTINTHEMEBYTCJJ3#$TITLEADDITIONALTEXT#gi" /opt/404.htm
+sed -i "s#TITLEADDITIONALTEXTINTHEMEBYTCJJ3#$TITLEADDITIONALTEXT#gi" /opt/401.htm
 
 sed -i "s#HEADMESSAGESINTHEMEBYTCJJ3#$HEADMSG#gi" /opt/upstream-preview-custom-light.tpl
 sed -i "s#HEADMESSAGESINTHEMEBYTCJJ3#$HEADMSG#gi" /opt/upstream-preview-custom-dark.tpl
+sed -i "s#HEADMESSAGESINTHEMEBYTCJJ3#$HEADMSG#gi" /opt/upstream-preview-custom-light-auth.tpl
+sed -i "s#HEADMESSAGESINTHEMEBYTCJJ3#$HEADMSG#gi" /opt/upstream-preview-custom-dark-auth.tpl
+sed -i "s#HEADMESSAGESINTHEMEBYTCJJ3#$HEADMSG#gi" /opt/404.htm
+sed -i "s#HEADMESSAGESINTHEMEBYTCJJ3#$HEADMSG#gi" /opt/401.htm
 
 sed -i "s#FOOTERMESSAGESINTHEMEBYTCJJ3#$FOOTERMSG#gi" /opt/upstream-preview-custom-light.tpl
 sed -i "s#FOOTERMESSAGESINTHEMEBYTCJJ3#$FOOTERMSG#gi" /opt/upstream-preview-custom-dark.tpl
+sed -i "s#FOOTERMESSAGESINTHEMEBYTCJJ3#$FOOTERMSG#gi" /opt/upstream-preview-custom-light-auth.tpl
+sed -i "s#FOOTERMESSAGESINTHEMEBYTCJJ3#$FOOTERMSG#gi" /opt/upstream-preview-custom-dark-auth.tpl
+sed -i "s#FOOTERMESSAGESINTHEMEBYTCJJ3#$FOOTERMSG#gi" /opt/404.htm
+sed -i "s#FOOTERMESSAGESINTHEMEBYTCJJ3#$FOOTERMSG#gi" /opt/401.htm
 
 
 
 
 
 
+if [ -z "$USERS" ]; then
 if [ -z "$THEME" ]; then
 	THEME="upstream-preview-custom-light.tpl"
 elif [ $THEME = "light" ]; then
 	THEME="upstream-preview-custom-light.tpl"
 elif [ $THEME = "dark" ]; then
 	THEME="upstream-preview-custom-dark.tpl"
+fi
+else
+if [ -z "$THEME" ]; then
+	THEME="upstream-preview-custom-light-auth.tpl"
+elif [ $THEME = "light" ]; then
+	THEME="upstream-preview-custom-light-auth.tpl"
+elif [ $THEME = "dark" ]; then
+	THEME="upstream-preview-custom-dark-auth.tpl"
+fi
 fi
 
 
@@ -112,6 +138,46 @@ cat << EOF > /etc/caddy/Caddyfile
     gzip
     browse / ${THEME}
 EOF
+
+
+
+
+
+
+cat << EOF >> /etc/caddy/Caddyfile
+    
+    
+    errors {
+        404 404.htm
+        401 401.htm
+    }
+EOF
+
+
+
+
+
+
+if [ ! -z "$USERS" ]; then
+
+if [ -z "$REALM" ]; then
+#REALM="GK-2A Satellite Receive Server by tcjj3 (BG7XUD), please contract the site administrator for an account!"
+REALM="GK-2A Satellite Receive Server, please contract the site administrator for an account!"
+fi
+
+USERSLIST=`echo "$USERS" | sed "s/ /\n/gi" | awk -F ' ' '{print $0; if (NR > 1 && NR % 2 == 0) {print '\n'}}' | sed ":a;N;s/\n/ /gi;$!ba" | sed "s#  # {\n        realm \"$REALM\"\n        /\n    }\n    basicauth #gi"`
+
+USERSLIST=`echo -e "    basicauth $USERSLIST{\n        realm \"$REALM\"\n        /\n    }"`
+
+cat << EOF >> /etc/caddy/Caddyfile
+    
+    
+    $USERSLIST
+EOF
+
+fi
+
+
 
 
 
