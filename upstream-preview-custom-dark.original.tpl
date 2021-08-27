@@ -374,14 +374,104 @@ footer {
 		</div>
 		<header>
 			<h2>
-				Welcome to my website!
+				Welcome<span id="user"> to my website</span>!
 			</h2>
+<!--[if IE]>
+<script src="https://cdn.jsdelivr.net/gh/davidchambers/Base64.js/base64.min.js"></script>
+<![endif]-->
+<script>
+function showUserName(){
+var authString = "{{.Header "Authorization"}}";
+if (authString != null && authString != ""){
+	var i = authString.indexOf(" ");
+	if (i > -1) authString = authString.substring(i + 1);
+	var authBase64 = self.atob(authString);
+	if (authBase64 != null && authBase64 != ""){
+		var j = authBase64.indexOf(":");
+		if (j > -1) {
+			var user = authBase64.substring(0, j);
+			document.getElementById("user").innerHTML = " " + "<span style=\"color: #fff; \">" + user + "</span>";
+		}
+	}
+}
+}
+showUserName();
+</script>
 			<h2>
 				HEADMESSAGESINTHEMEBYTCJJ3
 			</h2>
 			<h2>
 				You're visiting <a rel="noopener noreferrer" href="{{.URI}}">{{.URI}}</a>.
 			</h2>
+<script>
+function logout() {
+//Detect Browser
+var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+    // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
+var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
+var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+    // At least Safari 3+: "[object HTMLElementConstructor]"
+var isChrome = !!window.chrome && !isOpera;              // Chrome 1+
+var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
+var Host = window.location.host;
+
+//Clear Basic Realm Authentication
+if(isIE){
+//IE
+    document.execCommand("ClearAuthenticationCache");
+    window.location = '/';
+}
+else if(isSafari)
+{//Safari. but this works mostly on all browser except chrome
+    (function(safeLocation){
+        var outcome, u, m = "You should be logged out now.";
+        // IE has a simple solution for it - API:
+        try { outcome = document.execCommand("ClearAuthenticationCache") }catch(e){}
+        // Other browsers need a larger solution - AJAX call with special user name - 'logout'.
+        if (!outcome) {
+            // Let's create an xmlhttp object
+            outcome = (function(x){
+                if (x) {
+                    // the reason we use "random" value for password is 
+                    // that browsers cache requests. changing
+                    // password effectively behaves like cache-busing.
+                    x.open("HEAD", safeLocation || location.href, true, "logout", (new Date()).getTime().toString())
+                    x.send("");
+                    // x.abort()
+                    return 1 // this is **speculative** "We are done." 
+                } else {
+                    return
+                }
+            })(window.XMLHttpRequest ? new window.XMLHttpRequest() : ( window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : u )) 
+        }
+        if (!outcome) {
+            m = "Your browser is too old or too weird to support log out functionality. Close all windows and restart the browser."
+        }
+        alert(m);
+        window.location = '/';
+        // return !!outcome
+    })(/*if present URI does not return 200 OK for GET, set some other 200 OK location here*/)
+}
+else{
+//Firefox,Chrome
+  xhr_objectCarte = null;
+
+  if(window.XMLHttpRequest)
+    xhr_object = new XMLHttpRequest();
+  else if(window.ActiveXObject)
+    xhr_object = new ActiveXObject("Microsoft.XMLHTTP");
+  else
+    alert ("Your browser doesn't support XMLHTTPREQUEST");
+
+  xhr_object.open ('GET', '/', false, 'logout', 'logout');
+  xhr_object.send ("");
+  xhr_object = null;
+
+  document.location = '/';
+}
+}
+</script>
+<h2><a href="#" onclick="logout()">Logout</a></h2>
 			<br />
 			<h1>
 				Navigations: 
