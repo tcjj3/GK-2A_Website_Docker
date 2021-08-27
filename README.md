@@ -53,8 +53,8 @@ Run GK-2A_Website_Docker.
 <br>
 **The `FOOTERMSG` environment variable is to set the `Message` which you want to show at the `Footer` of the website.**
 <br>
-**The `USERS` environment variable is to set the `UserNames` and `Passwords` which you want to just authorize to access the website. Each `UserName` or `Password` is seperated with just a space.**
+**The `USERS` environment variable is to set the `UserNames` and `Passwords` which you want to just authorize to access the website. Each `UserName` or `Password` is seperated with just a space. If this environment variable is not setted or setted to an empty value, then everyone can access to the website (not enable `basicauth`).**
 <br>
-**The `REALM` environment variable is to set the `Message` which you want to show at the `Login Dialog` of the website.**
+**The `REALM` environment variable is to set the `Message` which you want to show in the `Login Dialog` of this website.**
 <br>
 **The other environment variables are just like in [tcjj3/GK-2A_Hirez_Docker](https://github.com/tcjj3/GK-2A_Hirez_Docker).**
