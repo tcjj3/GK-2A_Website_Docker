@@ -535,6 +535,86 @@ fi
 
 
 
+
+
+if [ $SHOW_LATESTIMAGES = "1" ]; then
+	SHOW_LATESTIMAGES="true"
+fi
+
+if [ $SHOW_LATESTIMAGES = "0" ]; then
+	SHOW_LATESTIMAGES="false"
+fi
+
+if [ $SHOW_LATESTIMAGES = "True" ]; then
+	SHOW_LATESTIMAGES="true"
+fi
+
+if [ $SHOW_LATESTIMAGES = "False" ]; then
+	SHOW_LATESTIMAGES="false"
+fi
+
+if [ $SHOW_LATESTIMAGES = "TRUE" ]; then
+	SHOW_LATESTIMAGES="true"
+fi
+
+if [ $SHOW_LATESTIMAGES = "FALSE" ]; then
+	SHOW_LATESTIMAGES="false"
+fi
+
+if [ $SHOW_LATESTIMAGES != "false" ] && [ ! -z "$SHOW_LATESTIMAGES" ]; then
+touch /tmp/showlatestimages > /dev/null 2>&1 &
+
+cat << EOF >> /etc/caddy/Caddyfile
+    
+    proxy /LatestFullDisk.jpg 127.0.0.1:4043
+    proxy /LatestFullDisk.txt 127.0.0.1:4043
+    proxy /LatestFullDisk-fc.jpg 127.0.0.1:4043
+    proxy /LatestFullDisk-fc.txt 127.0.0.1:4043
+    proxy /LatestMerged.gif 127.0.0.1:4043
+    proxy /LatestMerged.txt 127.0.0.1:4043
+EOF
+
+/opt/latest_image_links.sh > /dev/null 2>&1 &
+else
+rm -f /tmp/showlatestimages > /dev/null 2>&1 &
+fi
+
+
+if [ $CREATE_LATESTIMAGES_LINKS = "1" ]; then
+	CREATE_LATESTIMAGES_LINKS="true"
+fi
+
+if [ $CREATE_LATESTIMAGES_LINKS = "0" ]; then
+	CREATE_LATESTIMAGES_LINKS="false"
+fi
+
+if [ $CREATE_LATESTIMAGES_LINKS = "True" ]; then
+	CREATE_LATESTIMAGES_LINKS="true"
+fi
+
+if [ $CREATE_LATESTIMAGES_LINKS = "False" ]; then
+	CREATE_LATESTIMAGES_LINKS="false"
+fi
+
+if [ $CREATE_LATESTIMAGES_LINKS = "TRUE" ]; then
+	CREATE_LATESTIMAGES_LINKS="true"
+fi
+
+if [ $CREATE_LATESTIMAGES_LINKS = "FALSE" ]; then
+	CREATE_LATESTIMAGES_LINKS="false"
+fi
+
+if [ $CREATE_LATESTIMAGES_LINKS != "false" ] && [ ! -z "$CREATE_LATESTIMAGES_LINKS" ]; then
+touch /tmp/createlatestimageslinks > /dev/null 2>&1 &
+else
+rm -f /tmp/createlatestimageslinks > /dev/null 2>&1 &
+fi
+
+
+
+
+
+
 cat << EOF >> /etc/caddy/Caddyfile
     
     

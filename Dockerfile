@@ -12,6 +12,7 @@ ADD upstream-preview-light.tpl /opt/upstream-preview-light.tpl
 ADD upstream-preview-dark.tpl /opt/upstream-preview-dark.tpl
 ADD upstream-preview.tpl /opt/upstream-preview.tpl
 ADD upstream.tpl /opt/upstream.tpl
+ADD latest_image_links.sh /opt/latest_image_links.sh
 ADD entrypoint.sh /opt/entrypoint.sh
 
 RUN export DIR_TMP="$(mktemp -d)" \
@@ -36,6 +37,8 @@ RUN export DIR_TMP="$(mktemp -d)" \
   && mkdir -p /opt/xrit-rx_config \
   && git clone https://github.com/sam210723/xrit-rx /usr/local/bin/xrit-rx \
   && mkdir -p /usr/local/bin/xrit-rx/src/received \
+  && mkdir -p /usr/local/bin/xrit-rx/src/received/LRIT \
+  && mkdir -p /usr/local/bin/xrit-rx/src/LatestImages \
   && cp -r /usr/local/bin/xrit-rx/src/html /usr/local/bin/xrit-rx/src/html_coloured \
   && cp /usr/local/bin/xrit-rx/src/html_coloured/js/dash.js /usr/local/bin/xrit-rx/src/html_coloured/js/dash.bak.js \
   && sed -i "s#if (ext != \"txt\") {#if (ext != \"txt\") {\n            if (url.indexOf(\"/FD/\") > -1) {\n                var fname_new = fname + \"-fc\";\n                \n                var url_old = url;\n                var Regex_FullDisk = /received\\\/LRIT\\\//i;\n                url = url.replace(Regex_FullDisk, \"received/LRIT/COLOURED/\");\n                Regex_FullDisk = /.jpg/i;\n                url = url.replace(Regex_FullDisk, \"-fc.jpg\");\n                Regex_FullDisk = /\\\/FD\\\//i;\n                url = url.replace(Regex_FullDisk, \"/\");\n            }\n#gi" /usr/local/bin/xrit-rx/src/html_coloured/js/dash.js \
@@ -95,6 +98,22 @@ RUN export DIR_TMP="$(mktemp -d)" \
   && echo "	}" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
   && echo "	" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
   && echo "}" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "server {" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "	listen 4043 default_server;" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "	listen [::]:4043 default_server;" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "	" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "	root /usr/local/bin/xrit-rx/src/LatestImages;" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "	" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "	index index.html index.htm LatestFullDisk-fc.jpg LatestFullDisk.jpg LatestMerged.gif;" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "	" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "	server_name _;" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "	" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "	location / {" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "		try_files \$uri \$uri/ =404;" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "	}" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "	" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
+  && echo "}" >> /etc/nginx/sites-available/dashboard_staticfiles || echo "continue..." \
   && ln -s /etc/nginx/sites-available/dashboard_staticfiles /etc/nginx/sites-enabled/dashboard_staticfiles || echo "continue..." \
   && if [ "$(dpkg --print-architecture)" = "armhf" ]; then \
         ARCH="arm7"; \
@@ -107,6 +126,8 @@ RUN export DIR_TMP="$(mktemp -d)" \
   && mv ${DIR_TMP}/caddy/caddy /usr/local/bin/caddy \
   && curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash \
   && chmod +x /opt/* /usr/local/bin/xrit-rx/src/xrit-rx.py \
+  && echo "* * * * * /opt/latest_image_links.sh &" > ${DIR_TMP}/crontab \
+  && crontab ${DIR_TMP}/crontab \
   && rm -rf ${DIR_TMP} \
   && apt-get autoremove --purge unzip git -y
 
