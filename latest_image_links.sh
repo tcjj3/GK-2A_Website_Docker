@@ -122,6 +122,10 @@ json_contents="${LATESTFULLDISK_CALLBACK}(${json_contents})"
 fi
 echo "${json_contents}" > "${LatestImagesDir}/LatestFullDisk.json"
 fi
+
+if [ ! -L "${LatestImagesDir}/LatestFullDisk.htm" ]; then
+ln -s "/opt/LatestFullDisk.htm" "${LatestImagesDir}/LatestFullDisk.htm" > /dev/null 2>&1
+fi
 else
 if [ -L "${LatestImagesDir}/LatestFullDisk.jpg" ]; then
 rm -f "${LatestImagesDir}/LatestFullDisk.jpg" > /dev/null 2>&1
@@ -203,6 +207,10 @@ json_contents="${LATESTFULLDISKFC_CALLBACK}(${json_contents})"
 fi
 echo "${json_contents}" > "${LatestImagesDir}/LatestFullDisk-fc.json"
 fi
+
+if [ ! -L "${LatestImagesDir}/LatestFullDisk-fc.htm" ]; then
+ln -s "/opt/LatestFullDisk-fc.htm" "${LatestImagesDir}/LatestFullDisk-fc.htm" > /dev/null 2>&1
+fi
 else
 if [ -L "${LatestImagesDir}/LatestFullDisk-fc.jpg" ]; then
 rm -f "${LatestImagesDir}/LatestFullDisk-fc.jpg" > /dev/null 2>&1
@@ -283,6 +291,10 @@ if [ ! -z "${LATESTMERGED_CALLBACK}" ]; then
 json_contents="${LATESTMERGED_CALLBACK}(${json_contents})"
 fi
 echo "${json_contents}" > "${LatestImagesDir}/LatestMerged.json"
+fi
+
+if [ ! -L "${LatestImagesDir}/LatestMerged.htm" ]; then
+ln -s "/opt/LatestMerged.htm" "${LatestImagesDir}/LatestMerged.htm" > /dev/null 2>&1
 fi
 else
 if [ -L "${LatestImagesDir}/LatestMerged.gif" ]; then

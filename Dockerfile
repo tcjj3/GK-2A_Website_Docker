@@ -8,6 +8,7 @@ ADD upstream-preview-custom-light.original.tpl /opt/upstream-preview-custom-ligh
 ADD upstream-preview-custom-dark.original.tpl /opt/upstream-preview-custom-dark.original.tpl
 ADD 404.original.htm /opt/404.original.htm
 ADD 401.original.htm /opt/401.original.htm
+ADD LatestImage.htm /opt/LatestImage.htm
 ADD upstream-preview-light.tpl /opt/upstream-preview-light.tpl
 ADD upstream-preview-dark.tpl /opt/upstream-preview-dark.tpl
 ADD upstream-preview.tpl /opt/upstream-preview.tpl
