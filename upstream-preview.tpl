@@ -398,10 +398,10 @@ td .goup {
 			}
 
 			function preview(url) {
-				model.classList.add('open');
 				ext = url.split('.').pop().toLowerCase();
 
 				if(['jpg','jpeg','gif','png','ico','svg','bmp'].indexOf(ext) >= 0) {
+					model.classList.add('open');
 					event.preventDefault();
 					previewVideoEl.classList.remove('open');
 					previewImageEl.classList.add('open');
@@ -409,6 +409,7 @@ td .goup {
 					
 				} else
 				if(['mp4','webm', 'avi', 'mkv', 'mp3'].indexOf(ext) >= 0) {
+					model.classList.add('open');
 					event.preventDefault();
 					previewImageEl.classList.remove('open');
 					previewVideoEl.classList.add('open');
