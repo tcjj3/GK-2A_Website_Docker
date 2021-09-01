@@ -41,7 +41,7 @@ Run GK-2A_Website_Docker.
  -e LATESTFULLDISK_CALLBACK="Callback_LatestFullDisk" \
  -e LATESTFULLDISKFC_CALLBACK="Callback_LatestFullDisk_fc" \
  -e LATESTMERGED_CALLBACK="Callback_LatestMerged" \
- -e LATESTIMAGE_CALLBACK="Callback_LatestImage" \
+ -e LATESTIMAGE_CALLBACK="Callback_Latest_Image" \
  -p 5007:5005 \
  -p 8899:8888 \
  -v xrit-rx_website_config:/opt/xrit-rx_config \
