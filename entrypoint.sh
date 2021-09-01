@@ -81,6 +81,7 @@ cp /opt/401.original.htm /opt/401.htm
 cp /opt/LatestImage.htm /opt/LatestFullDisk.htm
 cp /opt/LatestImage.htm /opt/LatestFullDisk-fc.htm
 cp /opt/LatestImage.htm /opt/LatestMerged.htm
+cp /opt/LatestImage.htm /opt/LatestImage.new.htm
 
 
 #if [ -z "$TITLEADDITIONALTEXT" ]; then
@@ -124,14 +125,17 @@ sed -i "s#FOOTERMESSAGESINTHEMEBYTCJJ3#$FOOTERMSG#gi" /opt/401.htm
 sed -i "s#TITLEADDITIONALTEXTINTHEMEBYTCJJ3#$TITLEADDITIONALTEXT#gi" /opt/LatestFullDisk.htm
 sed -i "s#TITLEADDITIONALTEXTINTHEMEBYTCJJ3#$TITLEADDITIONALTEXT#gi" /opt/LatestFullDisk-fc.htm
 sed -i "s#TITLEADDITIONALTEXTINTHEMEBYTCJJ3#$TITLEADDITIONALTEXT#gi" /opt/LatestMerged.htm
+sed -i "s#TITLEADDITIONALTEXTINTHEMEBYTCJJ3#$TITLEADDITIONALTEXT#gi" /opt/LatestImage.new.htm
 
 sed -i "s#LatestImage.js#LatestFullDisk.js#gi" /opt/LatestFullDisk.htm
 sed -i "s#LatestImage.js#LatestFullDisk-fc.js#gi" /opt/LatestFullDisk-fc.htm
 sed -i "s#LatestImage.js#LatestMerged.js#gi" /opt/LatestMerged.htm
+#sed -i "s#LatestImage.js#LatestImage.js#gi" /opt/LatestImage.new.htm
 
 sed -i "s#LatestImage#LatestFullDisk#gi" /opt/LatestFullDisk.htm
 sed -i "s#LatestImage#LatestFullDisk-fc#gi" /opt/LatestFullDisk-fc.htm
 sed -i "s#LatestImage#LatestMerged#gi" /opt/LatestMerged.htm
+#sed -i "s#LatestImage#LatestImage#gi" /opt/LatestImage.new.htm
 
 
 
@@ -666,6 +670,13 @@ if [ ! -z "$LATESTMERGED_CALLBACK" ]; then
 echo "$LATESTMERGED_CALLBACK" > /tmp/latestmergedcallback
 else
 rm -f /tmp/latestmergedcallback > /dev/null 2>&1 &
+fi
+
+
+if [ ! -z "$LATESTIMAGE_CALLBACK" ]; then
+echo "$LATESTIMAGE_CALLBACK" > /tmp/latestimagecallback
+else
+rm -f /tmp/latestimagecallback > /dev/null 2>&1 &
 fi
 
 
